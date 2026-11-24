@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+        =========================================================================
+        BẢN ĐỒ KHAI BÁO ỨNG DỤNG (ANDROID MANIFEST) - KIẾN TRÚC ZERO-FRAGMENT
+        - Tương đương file cấu hình Startup/Program.cs + Route Table bên Backend.
+        - Khai báo: Quyền hệ thống (Permissions), Class khởi chạy đầu tiên (EMarketApplication),
+          và toàn bộ 18 màn hình (Activity) chia cho 3 thành viên (Bạn, Duy, Long).
+        =========================================================================
+    -->
+
+    <!-- Quyền hệ thống:
+         - INTERNET / ACCESS_NETWORK_STATE: Gọi REST API, SignalR Realtime, kiểm tra mất mạng để fallback về Room SQLite.
+         - CAMERA: Dùng cho BarcodeScanActivity (CameraX + ML Kit quét mã vạch sản phẩm/hóa đơn).
+         - RECORD_AUDIO: Dùng cho nhập giọng nói ở màn AIAssistantActivity. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!-- Khai báo phần cứng Camera (autofocus không bắt buộc để máy ảo/máy giá rẻ vẫn cài được app) -->
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+
+    <!-- Cấu hình Application tổng:
+         - android:name=".EMarketApplication": Điểm chạy đầu tiên khi bật app (bật NetworkInspectorServer cổng 8088, căn lề Edge-to-Edge, gắn AuthSessionGuard).
+         - android:usesCleartextTraffic="true" + networkSecurityConfig: Cho phép gọi cả HTTP nội bộ (10.0.2.2:54446 / LAN) lẫn HTTPS Cloud. -->
+    <application
+        android:name=".EMarketApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Do_An_Di_Dong"
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        tools:targetApi="34">
+
+        <!-- [REGION 1 - BẠN] 1. Màn hình Đăng nhập (Launcher - có intent-filter MAIN/LAUNCHER nên luôn mở đầu tiên khi bấm icon app) -->
+        <activity
+            android:name=".ui.auth.LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Do_An_Di_Dong.Login"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- [REGION 1 - BẠN] 2. Tab Chính 1: Tổng quan Điều hành (Dashboard biểu đồ doanh thu & KPI) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+        <!-- [REGION 2 - DUY] 3. Tab Chính 2: Bán hàng tại quầy POS (Giỏ hàng, tích điểm, tiền mặt / VietQR PayOS) -->
+        <activity
+            android:name=".ui.pos.PosActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+        <!-- [REGION 1 - BẠN] 4. Tab Chính 3: Danh mục Hàng hóa (Tìm kiếm, lọc danh mục, phân trang, cache offline) -->
+        <activity
+            android:name=".ui.product.ProductsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+        <!-- [REGION 3 - LONG] 5. Tab Chính 4: Kho bãi & Biến động kho (2 tab: Tồn kho theo kho & Lịch sử xuất/nhập/kiểm kê) -->
+        <activity
+            android:name=".ui.inventory.WarehouseInventoryActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+        <!-- [REGION 2 - DUY] 6. Tab Chính 5: Tài khoản cá nhân & Cài đặt (Hồ sơ, đổi mật khẩu, cấu hình Server, đăng xuất) -->
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+        <!-- [REGION 1 - BẠN] 7. Quét mã vạch Camera (CameraX + ML Kit Barcode, trả mã quét được qua Intent Result về màn gọi nó) -->
+        <activity
+            android:name=".ui.product.BarcodeScanActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+        <!-- [REGION 1 - BẠN] 8. Chi tiết Sản phẩm (Xem thông tin, carousel ảnh, danh sách lô hàng FEFO, xóa ảnh & sản phẩm) -->
+        <activity
+            android:name=".ui.product.ProductDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+        <!-- [REGION 1 - BẠN] 9. Tạo / Sửa Sản phẩm (Form nhập sản phẩm, validate giá/tồn kho, chọn danh mục/NCC, upload ảnh) -->
+        <activity
+            android:name=".ui.product.ProductEditorActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+        <!-- [REGION 2 - DUY] 10. Lịch sử Đơn hàng (Danh sách hóa đơn bán, lọc trạng thái, tìm kiếm, quét mã bill) -->
+        <activity
+            android:name=".ui.sales.OrdersHistoryActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+        <!-- [REGION 2 - DUY] 11. Chi tiết Đơn hàng (Xem mặt hàng, lịch sử thanh toán, đổi trạng thái/hủy đơn, in lại bill nhiệt) -->
+        <activity
+            android:name=".ui.sales.OrderDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+        <!-- [REGION 3 - LONG] 12. Kiểm kê / Điều chỉnh Kho (Đếm tồn thực tế, cộng trừ nhanh, nhập lý do cân bằng kho) -->
+        <activity
+            android:name=".ui.inventory.StockAdjustmentActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+        <!-- [REGION 3 - LONG] 13. Đơn nhập hàng PO (Danh sách PO, tạo phiếu nhập nhiều dòng, duyệt nhập kho hoặc hủy PO) -->
+        <activity
+            android:name=".ui.inventory.PurchaseOrdersActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+        <!-- [REGION 3 - LONG] 14. Nhà cung cấp & Công nợ NCC (Xem nợ, trả nợ kèm ảnh chứng từ, CRUD NCC, kiêm cổng Supplier Portal) -->
+        <activity
+            android:name=".ui.dashboard.SupplierDebtActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+        <!-- [REGION 2 - DUY] 15. Khách hàng CRM (Danh sách khách, lọc hạng thẻ/điểm, thêm/sửa khách, xem lịch sử tích điểm) -->
+        <activity
+            android:name=".ui.admin.CustomersActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+        <!-- [REGION 3 - LONG] 16. Sổ quỹ & Chi phí vận hành (Danh sách phiếu chi, tạo phiếu chi, duyệt chi, đối soát tiền mặt cuối ca) -->
+        <activity
+            android:name=".ui.admin.ExpensesActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+        <!-- [REGION 2 - DUY] 17. Quản lý Nhân sự (Danh sách user, tạo/sửa nhân viên, gán Role/Chi nhánh/NCC, khóa tài khoản) -->
+        <activity
+            android:name=".ui.admin.UsersActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+        <!-- [REGION 1 - BẠN] 18. Trợ lý AI & Dự báo Thông minh (3 Tab: Chat AI RAG, Cố vấn nhập hàng/bất thường, Dự báo Prophet/rủi ro lô) -->
+        <activity
+            android:name=".ui.ai.AIAssistantActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Do_An_Di_Dong" />
+
+    </application>
+
+</manifest>

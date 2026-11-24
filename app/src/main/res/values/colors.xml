@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ======================================================== -->
+    <!-- BASE & MATERIAL3 SEED COLORS                             -->
+    <!-- ======================================================== -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF4F46E5</color>
+    <color name="purple_700">#FF3730A3</color>
+    <color name="teal_200">#FF14B8A6</color>
+    <color name="teal_700">#FF0D9488</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- ======================================================== -->
+    <!-- MODERN ENTERPRISE BRAND & ACCENT TOKENS                  -->
+    <!-- ======================================================== -->
+    <color name="slate_900">#0F172A</color>
+    <color name="primary">#4F46E5</color>
+    <color name="primary_brand">#4F46E5</color>
+    <color name="primary_blue">#2563EB</color>
+    <color name="primary_dark">#3730A3</color>
+    <color name="primary_light">#6366F1</color>
+    <color name="primary_50">#EEF2FF</color>
+    <color name="primary_soft">#EEF2FF</color>
+    <color name="primary_container">#EEF2FF</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_primary_container">#312E81</color>
+    <color name="on_secondary_container">#92400E</color>
+
+    <color name="secondary">#0EA5E9</color>
+    <color name="emerald">#10B981</color>
+    <color name="teal">#0D9488</color>
+    <color name="accent_rose">#F43F5E</color>
+
+    <color name="md_primary">#4F46E5</color>
+    <color name="md_primary_dark">#3730A3</color>
+    <color name="md_primary_light">#6366F1</color>
+    <color name="md_primary_container">#EEF2FF</color>
+    <color name="md_on_primary">#FFFFFF</color>
+    <color name="md_on_primary_container">#312E81</color>
+
+    <!-- ======================================================== -->
+    <!-- 3-LAYER SURFACE & BORDER HIERARCHY                       -->
+    <!-- ======================================================== -->
+    <color name="background">#F8FAFC</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_container_lowest">#FFFFFF</color>
+    <color name="surface_container_low">#F8FAFC</color>
+    <color name="surface_subtle">#F1F5F9</color>
+    <color name="surface_variant">#E2E8F0</color>
+    <color name="surface_dark">#1E293B</color>
+
+    <color name="border">#E2E8F0</color>
+    <color name="outline_variant">#E2E8F0</color>
+    <color name="border_strong">#CBD5E1</color>
+    <color name="card_stroke">#E2E8F0</color>
+    <color name="divider">#F1F5F9</color>
+
+    <color name="md_background">#F8FAFC</color>
+    <color name="md_surface">#FFFFFF</color>
+    <color name="md_surface_variant">#F1F5F9</color>
+    <color name="md_surface_container">#FFFFFF</color>
+    <color name="md_on_surface">#0F172A</color>
+    <color name="md_on_surface_variant">#475569</color>
+    <color name="md_outline">#E2E8F0</color>
+    <color name="md_outline_variant">#CBD5E1</color>
+
+    <!-- ======================================================== -->
+    <!-- TYPOGRAPHY COLORS                                        -->
+    <!-- ======================================================== -->
+    <color name="text_primary">#0F172A</color>
+    <color name="text_secondary">#475569</color>
+    <color name="text_muted">#64748B</color>
+    <color name="text_tertiary">#64748B</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_link">#2563EB</color>
+
+    <!-- ======================================================== -->
+    <!-- SEMANTIC STATUS TOKENS (FILL + BORDER + TEXT TRIO)       -->
+    <!-- ======================================================== -->
+    <!-- Success (Emerald) -->
+    <color name="success">#10B981</color>
+    <color name="success_dark">#059669</color>
+    <color name="success_bg">#F0FDF4</color>
+    <color name="success_border">#BBF7D0</color>
+    <color name="success_text">#15803D</color>
+    <color name="success_container">#F0FDF4</color>
+    <color name="on_success_container">#15803D</color>
+
+    <!-- Warning (Amber) -->
+    <color name="warning">#F59E0B</color>
+    <color name="warning_dark">#D97706</color>
+    <color name="warning_bg">#FFFBEB</color>
+    <color name="warning_border">#FDE68A</color>
+    <color name="warning_text">#B45309</color>
+    <color name="warning_container">#FFFBEB</color>
+    <color name="on_warning_container">#B45309</color>
+
+    <!-- Error / Danger (Rose-Red) -->
+    <color name="error">#EF4444</color>
+    <color name="error_dark">#DC2626</color>
+    <color name="error_bg">#FEF2F2</color>
+    <color name="error_border">#FECACA</color>
+    <color name="error_text">#B91C1C</color>
+    <color name="error_container">#FEF2F2</color>
+    <color name="on_error_container">#B91C1C</color>
+
+    <!-- Info (Blue) -->
+    <color name="info">#3B82F6</color>
+    <color name="info_dark">#2563EB</color>
+    <color name="info_bg">#EFF6FF</color>
+    <color name="info_border">#BFDBFE</color>
+    <color name="info_text">#1D4ED8</color>
+    <color name="info_container">#EFF6FF</color>
+    <color name="on_info_container">#1D4ED8</color>
+
+    <!-- ======================================================== -->
+    <!-- DASHBOARD KPI CARD & CHAT COLORS                         -->
+    <!-- ======================================================== -->
+    <color name="kpi_revenue_bg">#EEF2FF</color>
+    <color name="kpi_revenue_icon">#4F46E5</color>
+    <color name="kpi_orders_bg">#F0FDF4</color>
+    <color name="kpi_orders_icon">#10B981</color>
+    <color name="kpi_stock_bg">#FFFBEB</color>
+    <color name="kpi_stock_icon">#F59E0B</color>
+    <color name="kpi_products_bg">#EFF6FF</color>
+    <color name="kpi_products_icon">#2563EB</color>
+
+    <color name="chat_user_bg">#4F46E5</color>
+    <color name="chat_user_text">#FFFFFF</color>
+    <color name="chat_bot_bg">#F1F5F9</color>
+    <color name="chat_bot_text">#0F172A</color>
+
+    <!-- Hero Gradient Tokens -->
+    <color name="hero_gradient_start">#0F172A</color>
+    <color name="hero_gradient_mid">#1E1B4B</color>
+    <color name="hero_gradient_end">#312E81</color>
+
+    <color name="login_gradient_start">#0F172A</color>
+    <color name="login_gradient_end">#312E81</color>
+    <color name="login_form_surface">#FFFFFF</color>
+
+    <!-- Legacy Compatibility Aliases -->
+    <color name="danger">#EF4444</color>
+    <color name="card_bg">#FFFFFF</color>
+    <color name="accent">#6366F1</color>
+</resources>
